@@ -1,15 +1,16 @@
 :root {
-    --primary-color: #333;
-    --secondary-color: #f4f4f4;
-    --background-color: #d3d3d3;
-    --border-color: #ccc;
-    --hover-color: #444;
-    --active-color: #222;
-    --focus-color: #444;
-    --button-color: #4CAF50;
-    --button-hover-color: #45a049;
-    --valid-color: green;
-    --invalid-color: red;
+  --primary-color: #333;
+  --secondary-color: #f4f4f4;
+  --background-color: #d3d3d3;
+  --border-color: #ccc;
+  --hover-color: #444;
+  --active-color: #222;
+  --focus-color: #444;
+  --button-color: #4caf50;
+  --button-hover-color: #45a049;
+  --valid-color: green;
+  --invalid-color: red;
+  --background-half-transparent: #0000004d;
 }
 /* #region Global Styles */
 * {
@@ -24,7 +25,12 @@ body {
   color: black;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--primary-color);
   margin: 0;
   padding: 0;
@@ -32,3 +38,52 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 /* #endregion */
+
+/* Dialog */
+dialog {
+  background-color: rgb(117, 117, 247);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px var(--active-color);
+  width: 100vw;
+  max-width: 100%;
+  z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+dialog::backdrop {
+  background: var(--background-half-transparent);
+  backdrop-filter: blur(5px);
+}
+/* Form styleing */
+#cookile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#accept-cookies {
+  background-color: #4caf50;
+  color: white;
+}
+#accept-necessary-cookies {
+  background-color: #ff9800;
+  color: white;
+}
+#decline-cookies {
+  background-color: #f44336;
+  color: white;
+}
