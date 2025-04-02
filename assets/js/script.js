@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   //  ! if NO! we all hate u gl in life
   declineButton.addEventListener('click', () => {
-    window.location.href = 'https://fuckyoucoin.my.canva.site/';
+    localStorage.setItem('cookiesAccepted', 'false');
+    cookiePopup.close();
   });
 });

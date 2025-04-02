@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Consent</title>
+    <style>
+      /* Popup container */
+      .cookie-popup {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #222;
+        color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 90%;
+        width: 450px;
+        font-size: 14px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s;
+      }
+
+      /* Show popup */
+      .show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Form styling */
+      .cookie-options label {
+        display: block;
+        margin: 5px 0;
+        cursor: pointer;
+      }
+
+      /* Button container */
+      .cookie-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      /* Button styles */
+      .cookie-popup button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s;
+      }
+
+      .save-btn {
+        background: #4caf50;
+        color: white;
+      }
+
+      .save-btn:hover {
+        background: #45a049;
+      }
+
+      /* Learn more link */
+      .cookie-popup a {
+        color: #4caf50;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .cookie-popup a:hover {
+        color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cookie Popup -->
+    <div id="cookiePopup" class="cookie-popup">
+      <p>
+        This website uses cookies to improve your experience. Choose your preferences.
+        <a href="#">Learn more</a>
+      </p>
+
+      <div class="cookie-options">
+        <label>
+          <input type="radio" name="cookieChoice" value="necessary" checked />
+          Only Necessary
+        </label>
+        <label>
+          <input type="radio" name="cookieChoice" value="statistics" />
+          Necessary + Statistics
+        </label>
+        <label>
+          <input type="radio" name="cookieChoice" value="marketing" />
+          Necessary + Statistics + Marketing
+        </label>
+      </div>
+
+      <div class="cookie-buttons">
+        <button class="save-btn" onclick="savePreferences()">Save Preferences</button>
+      </div>
+    </div>
+
+    <script>
+      // Function to check saved preferences
+      function checkCookies() {
+        let savedChoice = localStorage.getItem("cookiePreference");
+        if (!savedChoice) {
+          document.getElementById("cookiePopup").classList.add("show");
+        } else {
+          applyCookies(savedChoice);
+        }
+      }
+
+      // Function to save cookie preferences
+      function savePreferences() {
+        let selectedValue = document.querySelector('input[name="cookieChoice"]:checked').value;
+        localStorage.setItem("cookiePreference", selectedValue);
+        applyCookies(selectedValue);
+        closePopup();
+      }
+
+      // Function to apply cookie settings
+      function applyCookies(choice) {
+        console.log("User selected:", choice);
+        if (choice === "statistics" || choice === "marketing") {
+          enableAnalytics();
+        }
+        if (choice === "marketing") {
+          enableMarketing();
+        }
+      }
+
+      // Function to enable analytics cookies
+      function enableAnalytics() {
+        console.log("Analytics cookies enabled.");
+        // Here, you can dynamically load Google Analytics or another tracking script.
+      }
+
+      // Function to enable marketing cookies
+      function enableMarketing() {
+        console.log("Marketing cookies enabled.");
+        // Here, you can load ad tracking scripts.
+      }
+
+      // Function to close the popup
+      function closePopup() {
+        const popup = document.getElementById("cookiePopup");
+        popup.classList.remove("show");
+        setTimeout(() => (popup.style.display = "none"), 500);
+      }
+
+      // Run on page load
+      window.onload = checkCookies;
+    </script>
+  </body>
+</html>
